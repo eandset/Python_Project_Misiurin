@@ -6,4 +6,15 @@
 # R = √(x2 – x1)2 + (у2 – y1)2.
 # Для хранения данных о каждом наборе точек следует использовать по два списка: первый
 # список для хранения абсцисс, второй — для хранения ординат.
+import math
+
+
+class Point:
+    x: float
+    y: float
+
+
+def distance(a: Point, b: Point) -> float:
+    return math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+
 
