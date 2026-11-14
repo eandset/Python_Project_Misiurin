@@ -3,32 +3,42 @@
 # содержит все числа от 1 до N, то вывести 0; в противном случае вывести номер
 # первого недопустимого элемента.
 
-from input_number import get_int, get_float
-from typing import Tuple
+from random import randint, shuffle
+from input_number import get_int
 
+def find_invalid_element(numbers: list[int]) -> int:
+    n = len(numbers)
+    pattern = []
 
-def get_invalid_index(numbers: list) -> Tuple[bool, int]:
-    last = 0
-    for i, item in enumerate(numbers):
-        if last + 1 != item:
-            return False, i
+    for i in range(n + 1):
+        pattern.append(i)
 
-        last += 1
+    for index, num in enumerate(numbers):
+        if num not in pattern:
+            return index
+        pattern.remove(num)
 
-    return True, 0
-
+    return 0
 
 n = get_int("Введите размер списка (N): ")
-
 if n <= 0:
     print("Ошибка! N должен быть больше 0.")
     exit(1)
 
 numbers = []
 for i in range(n):
-    numbers.append(get_float(f"Введите число #{i}: "))
+    random_int = randint(1, n)
+    numbers.append(random_int)
 
-is_per, index = get_invalid_index(numbers)
-msg = ("Является " if is_per else "Не является ") + "перестановкой"
+print("Рандомные числа:")
+print(f"#{find_invalid_element(numbers)}")
+print(numbers)
 
-print(msg, index)
+print()
+print("Целевой список:")
+
+numbers = list(range(1, n + 1))
+shuffle(numbers)
+
+print(f"#{find_invalid_element(numbers)}")
+print(numbers)
