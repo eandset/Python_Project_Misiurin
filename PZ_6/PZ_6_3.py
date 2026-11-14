@@ -6,15 +6,30 @@
 # R = √(x2 – x1)2 + (у2 – y1)2.
 # Для хранения данных о каждом наборе точек следует использовать по два списка: первый
 # список для хранения абсцисс, второй — для хранения ординат.
-import math
 
+from math import sqrt
+from input_number import get_int
+from Point.point_operations import get_point, distance_sqr
 
-class Point:
-    x: float
-    y: float
+points = []
+point_b = get_point("Введите точку B")
 
+n = get_int("Введите количество точек (N): ")
+if n <= 0:
+    print("Ошибка! N должен быть больше 0.")
+    exit(1)
 
-def distance(a: Point, b: Point) -> float:
-    return math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2)
+for i in range(n):
+    points.append(get_point(f"Введите точку #{i}"))
 
+min_distance_sqr = -1
+closest_point = None
 
+for i in points:
+    d = distance_sqr(i, point_b)
+
+    if d < min_distance_sqr or min_distance_sqr == -1:
+        min_distance_sqr = d
+        closest_point = i
+
+print(f"Точка: {closest_point}. Расстояние до точки B {point_b}: {sqrt(min_distance_sqr)}")

@@ -4,9 +4,10 @@
 # первого недопустимого элемента.
 
 from input_number import get_int, get_float
+from typing import Tuple
 
 
-def get_invalid_index(numbers: list) -> (bool, int):
+def get_invalid_index(numbers: list) -> Tuple[bool, int]:
     last = 0
     for i, item in enumerate(numbers):
         if last + 1 != item:
